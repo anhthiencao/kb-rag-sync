@@ -1,0 +1,41 @@
+{
+  "name": "optibot-pipeline",
+  "version": "1.0.0",
+  "description": "RAG pipeline: scrape OptiSigns support docs -> clean Markdown -> OpenAI Vector Store -> OptiBot assistant, as a Dockerized daily delta job.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/main.js",
+    "dev": "tsx src/main.ts",
+    "scrape": "tsx src/main.ts --scrape-only",
+    "dry-run": "tsx src/main.ts --dry-run",
+    "create-assistant": "tsx scripts/createAssistant.ts",
+    "verify-playground": "tsx scripts/verifyPlayground.ts",
+    "test": "vitest run",
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "axios": "^1.7.0",
+    "cheerio": "^1.0.0",
+    "dotenv": "^16.4.0",
+    "openai": "^4.60.0",
+    "turndown": "^7.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/turndown": "^5.0.4",
+    "@typescript-eslint/eslint-plugin": "^7.16.0",
+    "@typescript-eslint/parser": "^7.16.0",
+    "eslint": "^8.57.0",
+    "nock": "^13.5.0",
+    "playwright": "^1.45.0",
+    "prettier": "^3.3.0",
+    "tsx": "^4.16.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  }
+}

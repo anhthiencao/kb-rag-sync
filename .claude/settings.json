@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "fileCheckpointingEnabled": true,
+  "permissions": {
+    "defaultMode": "auto",
+    "allow": [
+      "Read",
+      "Bash(python3 *)",
+      "Bash(python *)",
+      "Bash(pip install *)",
+      "Bash(pip3 install *)",
+      "Bash(pytest *)",
+      "Bash(ruff *)",
+      "Bash(python3 -m *)",
+      "Bash(.venv/bin/python *)",
+      "Bash(.venv/bin/pytest *)",
+      "Bash(.venv/bin/ruff *)",
+      "Bash(.venv/bin/pip *)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git add *)",
+      "Bash(git restore*)",
+      "Bash(git checkout*)",
+      "Bash(npx playwright *)",
+      "Edit(src/**)",
+      "Edit(tests/**)",
+      "Edit(scripts/**)",
+      "Edit(docs/**)",
+      "Edit(data/**)",
+      "Edit(.claude/**)",
+      "Write(src/**)",
+      "Write(tests/**)",
+      "Write(scripts/**)",
+      "Write(docs/**)",
+      "Write(data/**)"
+    ],
+    "deny": ["Read(.env)", "Bash(rm -rf /*)"]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/session_start.sh\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/checkpoint.sh\"",
+            "timeout": 20,
+            "statusMessage": "Snapshotting checkpoint…"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/lint.sh\"",
+            "timeout": 60,
+            "statusMessage": "Linting Python…"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PROJECT_DIR:-.}/scripts/validate.mjs\" --gate",
+            "timeout": 360,
+            "statusMessage": "Running constraint gate…"
+          }
+        ]
+      }
+    ]
+  }
+}

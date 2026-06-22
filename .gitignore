@@ -1,0 +1,28 @@
+# Secrets
+.env
+*.env
+!.env.sample
+
+# Node
+node_modules/
+dist/
+*.tsbuildinfo
+npm-debug.log*
+
+# Note: data/articles/*.md ARE committed — they are scrape-quality deliverables.
+
+# The user's GLOBAL gitignore (~/.gitignore) excludes `.claude`. This project
+# ships its agentic workflow (skills/hooks/settings.json) inside .claude, so we
+# re-include it here, then re-exclude personal/transient files.
+!.claude/
+!.claude/**
+.claude/settings.local.json
+.claude/.gate_attempts
+
+# Playwright persistent profile (holds your OpenAI login)
+.pwprofile/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
