@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.git/
+.github/
+.claude/
+test/
+docs/
+data/
+.pwprofile/
+.env
+*.md
+!README.md
+npm-debug.log*
