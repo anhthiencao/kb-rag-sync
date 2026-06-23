@@ -13,6 +13,7 @@
     "scrape": "tsx src/main.ts --scrape-only",
     "dry-run": "tsx src/main.ts --dry-run",
     "create-assistant": "tsx scripts/createAssistant.ts",
+    "ask": "tsx scripts/askBot.ts",
     "verify-playground": "tsx scripts/verifyPlayground.ts",
     "test": "vitest run",
     "lint": "eslint . && prettier --check .",
