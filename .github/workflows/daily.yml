@@ -1,0 +1,25 @@
+name: daily-optibot-sync
+
+# App Platform has no native cron, so GitHub Actions is the scheduler: it triggers
+# a DigitalOcean deployment once per day, which runs the PRE_DEPLOY job (see
+# .do/app.yaml). Job logs are visible in the DO dashboard -> App -> Runtime Logs.
+#
+# Required repo secrets:
+#   DIGITALOCEAN_ACCESS_TOKEN  - DO API token (read+write)
+#   DO_APP_ID                  - app id from `doctl apps list`
+
+on:
+  schedule:
+    - cron: '0 19 * * *' # 02:00 Asia/Ho_Chi_Minh (UTC+7) = 19:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - name: Trigger deployment (runs the daily job)
+        run: doctl apps create-deployment "${{ secrets.DO_APP_ID }}" --wait

@@ -102,9 +102,12 @@ console.log(resp.output_text);
 
 ## Daily job (DigitalOcean)
 
-Deployed as a **DigitalOcean App Platform Scheduled Job** (cron `0 2 * * *`). It re-scrapes,
-uploads only the delta, logs `added/updated/skipped` + chunk counts, and pushes the updated
-manifest. Runtime logs: _<add the DO Scheduled Job logs link here>_.
+App Platform has no native cron, so a **GitHub Actions cron** (`.github/workflows/daily.yml`,
+daily at 02:00 ICT) triggers a DigitalOcean deployment that runs a **Job component**
+(`.do/app.yaml`, built from the Dockerfile). Each run re-scrapes, uploads only the delta,
+and logs `added/updated/skipped` + chunk counts to the DO Runtime Logs.
+
+Step-by-step: [`docs/DEPLOY.md`](docs/DEPLOY.md). Runtime logs: _<add the DO app logs link here>_.
 
 ## Playground screenshot
 

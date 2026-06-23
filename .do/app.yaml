@@ -1,0 +1,38 @@
+# DigitalOcean App Platform spec — OptiBot daily sync.
+#
+# App Platform has no native cron, so this defines a JOB component that runs the
+# Dockerized pipeline on each deployment. A GitHub Actions cron
+# (.github/workflows/daily.yml) triggers a deployment once per day via
+# `doctl apps create-deployment`, which runs this job (logs visible in DO).
+#
+# Create:  doctl apps create --spec .do/app.yaml
+# Update:  doctl apps update <APP_ID> --spec .do/app.yaml
+name: kb-rag-sync
+region: sgp
+jobs:
+  - name: optibot-sync
+    kind: PRE_DEPLOY
+    dockerfile_path: Dockerfile
+    source_dir: /
+    github:
+      repo: anhthiencao/kb-rag-sync
+      branch: master
+      deploy_on_push: false
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    instance_count: 1
+    envs:
+      - key: OPENAI_API_KEY
+        scope: RUN_TIME
+        type: SECRET # set the real value in the DO dashboard / via doctl
+      - key: VECTOR_STORE_ID
+        scope: RUN_TIME
+        value: vs_6a367c5dbfa4819190be394fd0f461a1
+      - key: ASSISTANT_ID
+        scope: RUN_TIME
+        value: asst_c6nnowx0SZYOGC6POW9fmRzG
+      - key: ZENDESK_SUBDOMAIN
+        scope: RUN_TIME
+        value: support.optisigns.com
+      - key: ZENDESK_LOCALE
+        scope: RUN_TIME
+        value: en-us
