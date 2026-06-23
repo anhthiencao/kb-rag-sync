@@ -5,32 +5,24 @@
     "defaultMode": "auto",
     "allow": [
       "Read",
-      "Bash(python3 *)",
-      "Bash(python *)",
-      "Bash(pip install *)",
-      "Bash(pip3 install *)",
-      "Bash(pytest *)",
-      "Bash(ruff *)",
-      "Bash(python3 -m *)",
-      "Bash(.venv/bin/python *)",
-      "Bash(.venv/bin/pytest *)",
-      "Bash(.venv/bin/ruff *)",
-      "Bash(.venv/bin/pip *)",
+      "Bash(npm *)",
+      "Bash(npx *)",
+      "Bash(node *)",
+      "Bash(tsx *)",
       "Bash(git status*)",
       "Bash(git diff*)",
       "Bash(git log*)",
       "Bash(git add *)",
       "Bash(git restore*)",
       "Bash(git checkout*)",
-      "Bash(npx playwright *)",
       "Edit(src/**)",
-      "Edit(tests/**)",
+      "Edit(test/**)",
       "Edit(scripts/**)",
       "Edit(docs/**)",
       "Edit(data/**)",
       "Edit(.claude/**)",
       "Write(src/**)",
-      "Write(tests/**)",
+      "Write(test/**)",
       "Write(scripts/**)",
       "Write(docs/**)",
       "Write(data/**)"
@@ -69,7 +61,7 @@
             "type": "command",
             "command": "bash \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/lint.sh\"",
             "timeout": 60,
-            "statusMessage": "Linting Python…"
+            "statusMessage": "Linting TypeScript…"
           }
         ]
       }
