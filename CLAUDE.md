@@ -4,7 +4,7 @@ RAG support-bot pipeline: scrape OptiSigns support docs → clean Markdown → u
 OpenAI Vector Store via API → "OptiBot" Assistant answers with citations → Dockerized
 daily job on DigitalOcean with incremental (delta) upload.
 
-See `docs/PLAN.md` for the full architecture, tech stack, and grading map.
+See `README.md` for the architecture, setup, and grading map.
 
 ## Language policy (hard rule)
 
