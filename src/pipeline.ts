@@ -11,6 +11,7 @@ import { ARTICLES_DIR, MANIFEST_PATH, type Config, zendeskBaseUrl } from './conf
 import { logger } from './logger.js';
 import { articleSlug, toMarkdown } from './scraper/markdownConverter.js';
 import { ZendeskClient } from './scraper/zendeskClient.js';
+import { pushManifest } from './store/githubManifest.js';
 import { ADDED, Manifest, SKIPPED, UPDATED } from './store/manifest.js';
 import {
   type UploadItem,
@@ -131,7 +132,23 @@ export async function runPipeline(cfg: Config, opts: RunOptions = {}): Promise<U
     }
   }
 
-  if (!dryRun) manifest.save(manifestPath);
+  if (!dryRun) {
+    manifest.save(manifestPath);
+    // Persist the delta baseline back to the repo (ephemeral containers lose state).
+    if (cfg.githubToken && cfg.githubRepo) {
+      try {
+        const r = await pushManifest({
+          token: cfg.githubToken,
+          repo: cfg.githubRepo,
+          branch: cfg.githubBranch,
+          manifestPath,
+        });
+        logger.info('manifest commit-back', { ...r });
+      } catch (e) {
+        logger.error('manifest commit-back failed', { error: String(e) });
+      }
+    }
+  }
 
   logger.info('pipeline complete', {
     ...result,

@@ -19,6 +19,9 @@ function cfg(overrides: Partial<Config> = {}): Config {
     zendeskLocale: 'en-us',
     maxChunkSizeTokens: 800,
     chunkOverlapTokens: 400,
+    githubToken: '',
+    githubRepo: '',
+    githubBranch: 'master',
     ...overrides,
   };
 }

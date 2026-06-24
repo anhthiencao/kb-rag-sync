@@ -5,7 +5,8 @@ dist/
 .claude/
 test/
 docs/
-data/
+# Keep data/manifest.json in the image (delta baseline); articles are re-scraped at runtime.
+data/articles/
 .pwprofile/
 .env
 *.md

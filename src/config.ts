@@ -20,6 +20,11 @@ export interface Config {
   zendeskLocale: string;
   maxChunkSizeTokens: number;
   chunkOverlapTokens: number;
+  // Optional: when both set, the job commits data/manifest.json back to GitHub
+  // (delta state persistence across ephemeral daily runs).
+  githubToken: string;
+  githubRepo: string; // owner/repo
+  githubBranch: string;
 }
 
 function int(name: string, fallback: number): number {
@@ -43,6 +48,9 @@ export function loadConfig(): Config {
     zendeskLocale: process.env.ZENDESK_LOCALE || 'en-us',
     maxChunkSizeTokens: int('MAX_CHUNK_SIZE_TOKENS', 800),
     chunkOverlapTokens: int('CHUNK_OVERLAP_TOKENS', 400),
+    githubToken: process.env.GITHUB_TOKEN ?? '',
+    githubRepo: process.env.GITHUB_REPO ?? '',
+    githubBranch: process.env.GITHUB_BRANCH || 'master',
   };
 }
 
