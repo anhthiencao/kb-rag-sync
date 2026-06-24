@@ -107,7 +107,10 @@ daily at 02:00 ICT) triggers a DigitalOcean deployment that runs a **Job compone
 (`.do/app.yaml`, built from the Dockerfile). Each run re-scrapes, uploads only the delta,
 and logs `added/updated/skipped` + chunk counts to the DO Runtime Logs.
 
-Step-by-step: [`docs/DEPLOY.md`](docs/DEPLOY.md). Runtime logs: _<add the DO app logs link here>_.
+Step-by-step: [`docs/DEPLOY.md`](docs/DEPLOY.md).
+
+**Live job & logs:** https://cloud.digitalocean.com/apps/ba3a077d-5b3b-4707-a8fd-e21ff79fd64b/deployments
+(DO App Platform → app `kb-rag-sync` → Runtime Logs).
 
 ## Playground screenshot
 
