@@ -109,7 +109,7 @@ and logs `added/updated/skipped` + chunk counts to the DO Runtime Logs.
 
 Step-by-step: [`docs/DEPLOY.md`](docs/DEPLOY.md).
 
-**Live job & logs:** https://cloud.digitalocean.com/apps/ba3a077d-5b3b-4707-a8fd-e21ff79fd64b/deployments
+**Live job & logs:** https://cloud.digitalocean.com/apps/cba88f4f-9726-4129-ac94-b10a9176d5e3/deployments
 (DO App Platform → app `kb-rag-sync` → Runtime Logs).
 
 ## Playground screenshot
