@@ -12,7 +12,12 @@ Zendesk API ─▶ scraper ─▶ clean Markdown ─▶ delta detector ─▶ Op
 ```
 
 Stack: Node.js 20 + TypeScript (ESM), `openai`, `axios`, `cheerio`, `turndown`, `vitest`.
-See [`docs/PLAN.md`](docs/PLAN.md) for full architecture and design notes.
+
+## Demo video
+
+▶️ **[Watch the 2-minute demo](docs/optibot-demo.mp4)** — a full walkthrough of every requirement.
+
+<video src="https://github.com/anhthiencao/kb-rag-sync/raw/master/docs/optibot-demo.mp4" controls width="100%"></video>
 
 ## Setup
 
@@ -107,8 +112,6 @@ daily at 02:00 ICT) triggers a DigitalOcean deployment that runs a **Job compone
 (`.do/app.yaml`, built from the Dockerfile). Each run re-scrapes, uploads only the delta,
 and logs `added/updated/skipped` + chunk counts to the DO Runtime Logs.
 
-Step-by-step: [`docs/DEPLOY.md`](docs/DEPLOY.md).
-
 **Live job & logs:** https://cloud.digitalocean.com/apps/cba88f4f-9726-4129-ac94-b10a9176d5e3/deployments
 (DO App Platform → app `kb-rag-sync` → Runtime Logs).
 
@@ -125,5 +128,5 @@ Sample question **"How do I add a YouTube video?"** answered with citations:
 | Scrape & clean (25)          | `src/scraper/`, `data/articles/*.md`                        |
 | API vector-store upload (20) | `src/store/openaiUploader.ts`, `scripts/createAssistant.ts` |
 | Daily job & logs (15)        | `Dockerfile`, DO Scheduled Job, JSON logs                   |
-| Code clarity + README (10)   | this file, `docs/PLAN.md`, tests, CI                        |
+| Code clarity + README (10)   | this file, tests, CI                                        |
 | Bonus (+5)                   | `vitest` suite + `--dry-run` smoke in CI                    |
