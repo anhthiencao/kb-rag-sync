@@ -36,3 +36,14 @@ jobs:
       - key: ZENDESK_LOCALE
         scope: RUN_TIME
         value: en-us
+      # Optional but recommended: persist the delta manifest back to the repo so
+      # changed articles aren't re-uploaded on later runs.
+      - key: GITHUB_TOKEN
+        scope: RUN_TIME
+        type: SECRET # a PAT with contents:write on kb-rag-sync
+      - key: GITHUB_REPO
+        scope: RUN_TIME
+        value: anhthiencao/kb-rag-sync
+      - key: GITHUB_BRANCH
+        scope: RUN_TIME
+        value: master
